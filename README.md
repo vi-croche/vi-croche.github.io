@@ -27,7 +27,7 @@ As fotos ficam em `img/`. O ideal é usar JPG com até 1000 px no lado maior par
 
 ## No ar
 
-O site está publicado em https://vitoresoodre.github.io/vi_croche/ pelo GitHub Pages. Cada `git push` na branch `main` atualiza o site em 1 ou 2 minutos.
+O site está publicado em https://vi-croche.github.io/ pelo GitHub Pages. Cada `git push` na branch `main` atualiza o site em 1 ou 2 minutos.
 
 A prévia do link no WhatsApp (foto, título e descrição) fica nas tags `og:` do `<head>`. Se o endereço do site mudar, troque também o `og:url` e o `og:image`. O WhatsApp guarda a prévia antiga por um tempo, então a mudança pode demorar a aparecer.
 
