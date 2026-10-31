@@ -25,7 +25,13 @@ Tudo fica no `index.html`:
 
 As fotos ficam em `img/`. O ideal é usar JPG com até 1000 px no lado maior para o site carregar rápido no celular.
 
-## Colocar no ar (grátis)
+## No ar
+
+O site está publicado em https://vitoresoodre.github.io/vi_croche/ pelo GitHub Pages. Cada `git push` na branch `main` atualiza o site em 1 ou 2 minutos.
+
+A prévia do link no WhatsApp (foto, título e descrição) fica nas tags `og:` do `<head>`. Se o endereço do site mudar, troque também o `og:url` e o `og:image`. O WhatsApp guarda a prévia antiga por um tempo, então a mudança pode demorar a aparecer.
+
+## Colocar no ar em outro lugar (grátis)
 
 - **GitHub Pages:** suba o repositório no GitHub e ative em *Settings → Pages* (branch `main`, pasta raiz).
 - **Netlify:** arraste esta pasta para app.netlify.com/drop.
