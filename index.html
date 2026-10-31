@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vi Crochê</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tapetes de crochê feitos à mão pela Vi, em São Paulo. Escolha o modelo e encomende pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Layout: faixa rosa com borda de "bico" no topo, vitrine em grade, rodapé vinho com o mesmo bico.
+   Paleta tirada da própria Vi: rosa e verde dos óculos, vinho do panfleto dela. */
+:root {
+  --paper: #FFF8F6;
+  --blush: #FADDE6;
+  --ink: #3B1626;
+  --muted: #7A5563;
+  --vinho: #8E1F45;
+  --rosa: #D94F86;
+  --verde: #2E7D68;
+  --zap: #168A55;
+  --zap-ink: #FFFFFF;
+  --line: #EED6DC;
+  --card: #FFFFFF;
+  --on-vinho: #FFF1F5;
+
+  --f-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --f-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-hand: "Caveat", "Segoe Print", cursive;
+
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --max: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1D1116; --blush: #331A24; --ink: #F7E9EE; --muted: #C9A9B5;
+    --vinho: #F28FB3; --rosa: #F5A3C2; --verde: #6FC9AE; --zap: #3CC488; --zap-ink: #0D2419;
+    --line: #47283392; --card: #26161D; --on-vinho: #FFF1F5;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1D1116; --blush: #331A24; --ink: #F7E9EE; --muted: #C9A9B5;
+  --vinho: #F28FB3; --rosa: #F5A3C2; --verde: #6FC9AE; --zap: #3CC488; --zap-ink: #0D2419;
+  --line: #47283392; --card: #26161D; --on-vinho: #FFF1F5;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: 1.12; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--rosa); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-left: var(--gutter-l);
+  padding-right: var(--gutter-r);
+}
+
+/* ---------- topo ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--blush);
+}
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--blush);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; }
+.logo b { font-family: var(--f-display); font-weight: 400; font-size: 1.7rem; color: var(--vinho); line-height: 1; }
+.logo span { font-family: var(--f-hand); font-size: 1.35rem; color: var(--verde); line-height: 1; }
+.nav { display: flex; align-items: center; gap: 20px; }
+.nav a.lnk { text-decoration: none; font-weight: 700; font-size: .95rem; color: var(--muted); }
+.nav a.lnk:hover { color: var(--vinho); }
+@media (max-width: 720px) { .nav a.lnk { display: none; } }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--f-body); font-weight: 800; font-size: 1rem;
+  padding: 12px 20px; border-radius: 999px; border: 0; cursor: pointer;
+  text-decoration: none; transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn-zap { background: var(--zap); color: var(--zap-ink); box-shadow: 0 4px 0 color-mix(in srgb, var(--zap) 55%, #000); }
+.btn-zap:active { transform: translateY(2px); box-shadow: 0 2px 0 color-mix(in srgb, var(--zap) 55%, #000); }
+.btn-ghost { background: transparent; color: var(--vinho); border: 2px solid currentColor; }
+.btn-sm { padding: 9px 16px; font-size: .92rem; }
+
+/* ---------- hero ---------- */
+.hero { background: var(--blush); position: relative; overflow-x: clip; }
+.hero .wrap { position: relative; z-index: 1; }
+
+/* estrelinhas e coraçõezinhos (a Vi é fã da Xuxa) */
+.brilhos { position: absolute; inset: 0; pointer-events: none; }
+.brilhos svg { position: absolute; color: var(--rosa); opacity: .55; animation: pisca 3.2s ease-in-out infinite; }
+.brilhos .b1 { width: 26px; height: 26px; left: 4%; top: 14%; }
+.brilhos .b2 { width: 20px; height: 20px; left: 44%; top: 8%; color: var(--vinho); opacity: .35; animation-delay: .8s; }
+.brilhos .b3 { width: 16px; height: 16px; left: 52%; bottom: 14%; animation-delay: 1.6s; }
+.brilhos .b4 { width: 24px; height: 24px; right: 5%; top: 10%; animation-delay: 2.2s; }
+.brilhos .b5 { width: 34px; height: 34px; right: 40%; top: 46%; color: #F2B544; opacity: .7; animation-delay: 1.1s; }
+.brilhos .b6 { width: 22px; height: 22px; left: 2%; bottom: 10%; color: var(--verde); opacity: .3; transform: rotate(-20deg); animation: none; }
+@keyframes pisca { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(.75) rotate(15deg); } }
+@media (max-width: 820px) { .brilhos .b5 { right: 8%; top: 52%; } .brilhos .b2 { left: 80%; } }
+
+/* trilha de patinhas */
+.patas { display: flex; gap: 18px; color: var(--rosa); opacity: .5; margin-bottom: 18px; }
+.patas svg { width: 22px; height: 22px; }
+.patas svg:nth-child(odd) { transform: translateY(8px) rotate(80deg); }
+.patas svg:nth-child(even) { transform: rotate(100deg); }
+
+/* cachorrinho do "sobre" */
+.sobre { position: relative; }
+.dog { position: absolute; right: 18px; bottom: 10px; width: 96px; height: auto; }
+.sobre .assina { padding-right: 100px; }
+
+/* selinho no card */
+.pet { display: inline-flex; align-items: center; gap: 6px; font-size: .84rem; font-weight: 700; color: var(--muted); }
+.pet svg { width: 16px; height: 16px; color: var(--rosa); }
+.hero .wrap {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center;
+  padding-block: 56px 40px;
+}
+.hero-txt { display: grid; gap: 22px; min-width: 0; }
+.kicker { font-family: var(--f-hand); font-size: 1.6rem; color: var(--verde); line-height: 1; }
+.hero h1 { font-size: clamp(2.3rem, 5.4vw, 3.9rem); color: var(--vinho); }
+.hero h1 em { font-style: normal; color: var(--rosa); }
+.hero-lead { font-size: 1.12rem; color: var(--muted); max-width: 34em; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: .92rem; font-weight: 700; color: var(--ink); padding: 0; margin: 0; list-style: none; }
+.hero-facts li { display: flex; align-items: center; gap: 7px; }
+.hero-facts li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--rosa); box-shadow: 14px 0 0 -9px transparent; }
+.hero-facts li:nth-child(2)::before { background: var(--verde); }
+.hero-facts li:nth-child(3)::before { background: var(--vinho); }
+
+.hero-art { position: relative; min-width: 0; display: grid; justify-items: center; }
+.polaroid {
+  background: #fff; padding: 12px 12px 46px; border-radius: 4px;
+  box-shadow: 0 18px 40px -18px rgba(80, 20, 45, .45);
+  width: min(100%, 420px);
+}
+.polaroid img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 2px; }
+.polaroid figcaption { font-family: var(--f-hand); font-size: 1.5rem; color: #8E1F45; text-align: center; margin-top: 8px; }
+.p1 { transform: rotate(-3deg); }
+.p2 {
+  position: absolute; width: min(46%, 200px); right: -6px; bottom: -28px; transform: rotate(6deg);
+  padding: 8px 8px 30px;
+}
+.p2 img { aspect-ratio: 3 / 4; }
+.p2 figcaption { font-size: 1.15rem; margin-top: 4px; }
+
+/* borda de bico de crochê */
+.bico { height: 16px; background: radial-gradient(circle at 12px 0, var(--blush) 11px, transparent 11.5px) 0 0 / 24px 16px repeat-x; }
+.bico-up { height: 16px; background: radial-gradient(circle at 12px 16px, var(--vinho-band) 11px, transparent 11.5px) 0 0 / 24px 16px repeat-x; }
+
+@media (max-width: 820px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 44px; padding-block: 36px 48px; }
+  .hero-art { padding-right: 24px; }
+}
+
+/* ---------- seções ---------- */
+section { scroll-margin-top: 80px; }
+.sec { padding-block: 72px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 32px; max-width: 40em; }
+.sec-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); color: var(--vinho); }
+.sec-head p { color: var(--muted); }
+
+/* filtros */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.chip {
+  font: 700 .95rem var(--f-body); color: var(--ink);
+  background: transparent; border: 1.5px solid var(--line); border-radius: 999px;
+  padding: 8px 16px; cursor: pointer;
+}
+.chip:hover { border-color: var(--rosa); }
+.chip[aria-pressed="true"] { background: var(--vinho); border-color: var(--vinho); color: var(--paper); }
+
+/* vitrine */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px 24px; }
+.item { display: grid; grid-template-rows: auto 1fr; background: var(--card); border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+.item[hidden] { display: none !important; }
+.ph { position: relative; display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in; background: #F3EAE4; }
+.ph img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.ph img.contain { object-fit: contain; padding: 14px; }
+.tag {
+  position: absolute; left: 12px; top: 12px;
+  font: 800 .72rem var(--f-body); letter-spacing: .08em; text-transform: uppercase;
+  background: rgba(255,255,255,.92); color: #8E1F45; padding: 5px 10px; border-radius: 999px;
+}
+.body { display: flex; flex-direction: column; gap: 8px; padding: 18px 18px 20px; }
+.body .desc { flex: 1; }
+.body h3 { font-size: 1.32rem; }
+.tec { font-size: .86rem; font-weight: 700; color: var(--verde); }
+.desc { font-size: .97rem; color: var(--muted); }
+.body .btn { margin-top: 10px; width: 100%; }
+
+/* como encomendar */
+.passos { background: var(--card); border-block: 1px solid var(--line); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; }
+.steps li::before {
+  content: counter(s); font-family: var(--f-display); font-size: 1.6rem; color: var(--rosa);
+  width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%;
+  border: 2px dashed var(--rosa);
+}
+.steps h3 { font-family: var(--f-body); font-weight: 800; font-size: 1.08rem; }
+.steps p { color: var(--muted); font-size: .97rem; }
+@media (max-width: 860px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+
+/* sob medida + sobre */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+@media (max-width: 820px) { .duo { grid-template-columns: 1fr; } }
+.costura {
+  border: 2px dashed var(--rosa); border-radius: 22px; padding: 32px;
+  display: grid; gap: 14px; align-content: start; min-width: 0;
+}
+.costura h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--vinho); }
+.costura p { color: var(--muted); }
+.costura ul { margin: 0; padding-left: 1.1em; color: var(--ink); display: grid; gap: 4px; }
+.sobre { background: var(--blush); border-radius: 22px; padding: 32px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.sobre h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--vinho); }
+.sobre p { color: var(--ink); }
+.assina { font-family: var(--f-hand); font-size: 2rem; color: var(--rosa); line-height: 1; }
+
+/* rodapé */
+:root { --vinho-band: #6E1634; }
+.foot { background: var(--vinho-band); color: var(--on-vinho); }
+.foot .wrap { padding-block: 56px 72px; display: grid; gap: 26px; justify-items: start; }
+.foot h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); color: var(--on-vinho); }
+.foot p { opacity: .85; max-width: 36em; }
+.numero { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.numero output { font-family: var(--f-display); font-size: clamp(1.6rem, 4vw, 2.2rem); user-select: all; font-variant-numeric: tabular-nums; }
+.copy { font: 700 .9rem var(--f-body); color: var(--on-vinho); background: transparent; border: 1.5px solid rgba(255,241,245,.5); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.copy:hover { border-color: var(--on-vinho); }
+.foot small { opacity: .7; font-size: .85rem; }
+.foot .btn-zap { background: #2FBF77; color: #0D2419; box-shadow: 0 4px 0 #17734A; }
+
+/* botão flutuante */
+.fab {
+  position: fixed; z-index: 6;
+  right: calc(18px + env(safe-area-inset-right, 0px));
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  width: 60px; height: 60px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--zap); color: var(--zap-ink);
+  box-shadow: 0 10px 24px -8px rgba(0,0,0,.45);
+}
+.fab svg { width: 30px; height: 30px; }
+
+/* foto ampliada */
+dialog.zoom { border: 0; padding: 0; background: transparent; max-width: min(92vw, 900px); }
+dialog.zoom::backdrop { background: rgba(30, 10, 18, .82); }
+dialog.zoom img { display: block; max-width: 100%; max-height: 82vh; border-radius: 12px; }
+dialog.zoom .x { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: #3B1626; font-size: 1.4rem; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .brilhos svg { animation: none; }
+  .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="zap" viewBox="0 0 32 32"><path fill="currentColor" d="M16.04 3C9 3 3.3 8.7 3.3 15.73c0 2.25.59 4.45 1.71 6.39L3.2 28.8l6.85-1.79a12.7 12.7 0 0 0 5.99 1.52h.01c7.03 0 12.74-5.7 12.74-12.73S23.07 3 16.04 3Zm0 23.37h-.01c-1.9 0-3.77-.51-5.4-1.48l-.39-.23-4.07 1.06 1.09-3.96-.25-.41a10.56 10.56 0 0 1-1.62-5.62c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.1 7.5 3.11a10.53 10.53 0 0 1 3.1 7.5c0 5.85-4.76 10.63-10.56 10.63Zm5.81-7.94c-.32-.16-1.88-.93-2.17-1.03-.29-.11-.5-.16-.71.16-.21.32-.82 1.03-1 1.24-.19.21-.37.24-.69.08-.32-.16-1.34-.49-2.56-1.58-.95-.85-1.59-1.89-1.77-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.71-1.71-.98-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65s1.14 3.08 1.3 3.29c.16.21 2.24 3.42 5.43 4.8.76.33 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.88-.77 2.14-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37Z"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></symbol>
+  <symbol id="heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-8.5-5.3-8.5-11.2A4.8 4.8 0 0 1 12 6.6a4.8 4.8 0 0 1 8.5 3.2C20.5 15.7 12 21 12 21z"/></symbol>
+  <symbol id="paw" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.2" cy="10.2" rx="2.2" ry="2.8"/><ellipse cx="9.4" cy="6" rx="2.2" ry="2.9"/><ellipse cx="14.6" cy="6" rx="2.2" ry="2.9"/><ellipse cx="18.8" cy="10.2" rx="2.2" ry="2.8"/></g></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Vi Crochê, início"><b>Vi</b><span>crochê</span></a>
+    <nav class="nav" aria-label="Seções">
+      <a class="lnk" href="#modelos">Modelos</a>
+      <a class="lnk" href="#como">Como encomendar</a>
+      <a class="lnk" href="#sobre">Sobre a Vi</a>
+      <a class="btn btn-zap btn-sm js-zap" href="#" target="_blank" rel="noopener"><svg><use href="#zap"/></svg>WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="brilhos" aria-hidden="true">
+      <svg class="b1"><use href="#star"/></svg>
+      <svg class="b2"><use href="#heart"/></svg>
+      <svg class="b3"><use href="#star"/></svg>
+      <svg class="b4"><use href="#heart"/></svg>
+      <svg class="b5"><use href="#star"/></svg>
+      <svg class="b6"><use href="#paw"/></svg>
+    </div>
+    <div class="wrap">
+      <div class="hero-txt">
+        <span class="kicker">feito à mão, ponto por ponto</span>
+        <h1>Tapetes de crochê que deixam a casa <em>com cara de abraço</em></h1>
+        <p class="hero-lead">Jogos de banheiro, passadeiras de cozinha e tapetes para a sala e o quarto. Cada peça é feita pela Vi, aqui em São Paulo, nas cores que você escolher.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-zap js-zap" href="#" target="_blank" rel="noopener"><svg><use href="#zap"/></svg>Falar com a Vi</a>
+          <a class="btn btn-ghost" href="#modelos">Ver os modelos</a>
+        </div>
+        <ul class="hero-facts">
+          <li>Feito sob encomenda</li>
+          <li>Você escolhe as cores</li>
+          <li>Peça única, feita à mão</li>
+        </ul>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <figure class="polaroid p1"><img src="img/hexagonos-flor.jpg" alt=""><figcaption>hexágonos rosa e cinza</figcaption></figure>
+        <figure class="polaroid p2"><img src="img/oval-file-cinza.jpg" alt=""><figcaption>ponto filé</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <div class="bico" aria-hidden="true"></div>
+
+  <section class="sec" id="modelos">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">a vitrine</span>
+        <h2>Escolha o seu modelo</h2>
+        <p>Gostou de algum? Toque em “Compre agora” e a conversa no WhatsApp já abre com o nome do modelo escrito. Todos podem ser feitos em outras cores e tamanhos.</p>
+      </div>
+      <div class="chips" role="group" aria-label="Filtrar por ambiente">
+        <button class="chip" type="button" id="f-todos" data-f="todos" aria-pressed="true">Todos</button>
+        <button class="chip" type="button" id="f-banheiro" data-f="banheiro" aria-pressed="false">Banheiro</button>
+        <button class="chip" type="button" id="f-cozinha" data-f="cozinha" aria-pressed="false">Cozinha</button>
+        <button class="chip" type="button" id="f-sala" data-f="sala" aria-pressed="false">Sala e quarto</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="sec passos" id="como">
+    <div class="wrap">
+      <div class="patas" aria-hidden="true">
+        <svg><use href="#paw"/></svg><svg><use href="#paw"/></svg><svg><use href="#paw"/></svg><svg><use href="#paw"/></svg><svg><use href="#paw"/></svg><svg><use href="#paw"/></svg>
+      </div>
+      <div class="sec-head">
+        <span class="kicker">simples assim</span>
+        <h2>Como encomendar</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Escolha o modelo</h3><p>Veja a vitrine e separe o que combina com a sua casa.</p></li>
+        <li><h3>Toque em “Compre agora”</h3><p>O WhatsApp da Vi abre com o modelo já escrito na mensagem.</p></li>
+        <li><h3>Combine os detalhes</h3><p>Cores, tamanho, valor, prazo e forma de entrega, tudo conversado direto com ela.</p></li>
+        <li><h3>Receba feito à mão</h3><p>Sua peça é tecida do zero, só para você.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="sobre">
+    <div class="wrap duo">
+      <div class="costura">
+        <span class="kicker">sob medida</span>
+        <h2>Viu um modelo mas queria em outra cor?</h2>
+        <p>Dá pra fazer. Mande a cor do seu banheiro, da cozinha ou do sofá e a Vi monta a combinação com você.</p>
+        <ul>
+          <li>Jogos de banheiro com 2 ou 3 peças</li>
+          <li>Passadeiras no comprimento do seu corredor</li>
+          <li>Tapetes ovais, retangulares e de hexágonos</li>
+          <li>Tapetinho para a caminha do seu cachorro</li>
+        </ul>
+        <div><a class="btn btn-zap js-zap" data-msg="Olá, Vi! Vi seu site e queria encomendar um tapete sob medida." href="#" target="_blank" rel="noopener"><svg><use href="#zap"/></svg>Pedir sob medida</a></div>
+      </div>
+      <div class="sobre">
+        <span class="kicker">quem faz</span>
+        <h2>Oi, eu sou a Vi!</h2>
+        <p>Sou paulistana, alegre e apaixonada pela vida. Fã da Xuxa desde sempre, por isso tanto rosa, estrelinha e coração por aqui. E sou louca por cachorro: minha shih-tzu é a primeira a testar cada tapete, sempre de roupinha rosa, claro.</p>
+        <p>O crochê é o meu cantinho de calma. Cada peça sai das minhas mãos, uma de cada vez, do jeito que eu colocaria na minha própria casa. Por isso nenhuma é igual à outra.</p>
+        <span class="assina">beijinhos, Vi ♡</span>
+        <svg class="dog" viewBox="0 0 120 130" aria-hidden="true">
+          <!-- a cachorrinha da Vi: shih-tzu de roupinha rosa e linguinha de fora -->
+          <ellipse cx="60" cy="124" rx="38" ry="5" fill="var(--rosa)" opacity=".18"/>
+          <path d="M28 96c0-14 14-22 32-22s32 8 32 22v24H28z" fill="#E0307E"/>
+          <path d="M44 80h32l-4 10H48z" fill="#C21F68"/>
+          <path d="M53 100h14M53 108h14" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="25" cy="58" rx="14" ry="26" fill="#B89A7E" transform="rotate(14 25 58)"/>
+          <ellipse cx="95" cy="58" rx="14" ry="26" fill="#B89A7E" transform="rotate(-14 95 58)"/>
+          <ellipse cx="60" cy="50" rx="33" ry="31" fill="#F6EEE4"/>
+          <path d="M34 34c6-12 18-17 26-17s20 5 26 17c-8-5-17-7-26-7s-18 2-26 7z" fill="#C9AE92"/>
+          <ellipse cx="46" cy="49" rx="10" ry="9" fill="#5B4636"/>
+          <circle cx="46" cy="50" r="6" fill="#1E140F"/>
+          <circle cx="74" cy="50" r="6" fill="#1E140F"/>
+          <circle cx="47.8" cy="48" r="1.8" fill="#fff"/>
+          <circle cx="75.8" cy="48" r="1.8" fill="#fff"/>
+          <ellipse cx="60" cy="61" rx="5.5" ry="4" fill="#1E140F"/>
+          <path d="M60 65v3M51 67c3 4 6 4 9 1c3 3 6 3 9-1" stroke="#1E140F" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M57 67c-2 9 10 11 11 2c0-3-1-4-2-4z" fill="#EF7FA6"/>
+          <path d="M48 14l12 6 12-6-3 12-9-4-9 4z" fill="#E0307E"/>
+          <circle cx="60" cy="20" r="3.2" fill="#F2B544"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="bico-up" aria-hidden="true"></div>
+<footer class="foot" id="contato">
+  <div class="wrap">
+    <h2>Vamos conversar?</h2>
+    <p>Encomendas, dúvidas sobre cores e valores: é só chamar a Vi no WhatsApp.</p>
+    <div class="numero">
+      <output id="numero">(11) 98756-1273</output>
+      <button class="copy" type="button" id="copy">Copiar número</button>
+    </div>
+    <a class="btn btn-zap js-zap" href="#" target="_blank" rel="noopener"><svg><use href="#zap"/></svg>Chamar no WhatsApp</a>
+    <small>Vi Crochê · Tapetes feitos à mão em São Paulo · com estrelinhas, coraçõezinhos e aprovação canina</small>
+  </div>
+</footer>
+
+<a class="fab js-zap" href="#" target="_blank" rel="noopener" aria-label="Falar com a Vi no WhatsApp"><svg><use href="#zap"/></svg></a>
+
+<dialog class="zoom" id="zoom">
+  <img id="zoom-img" src="" alt="">
+  <button class="x" type="button" id="zoom-x" aria-label="Fechar foto">×</button>
+</dialog>
+
+<script>
+// Número da Vi (com DDI 55 + DDD 11). Para trocar, altere só aqui.
+const WHATS = "5511987561273";
+
+// Vitrine: para adicionar um modelo, copie um bloco e troque os dados.
+const MODELOS = [
+  { nome: "Jogo de Banheiro Leque", foto: "img/banheiro-leque.jpg", amb: ["banheiro"], tag: "Jogo 2 peças",
+    tec: "Ponto filé com leques", desc: "Tapete oval e capa de tampa do vaso combinando, em tom areia com barradinho de bico." },
+  { nome: "Kit Cozinha Hexágonos", foto: "img/cozinha-hexagonos.jpg", amb: ["cozinha"], tag: "Kit 2 peças",
+    tec: "Hexágonos unidos à mão", desc: "Passadeira longa e tapete de pia em rosa, cinza e cru. Fica lindo em cozinha clara." },
+  { nome: "Tapete Hexágonos Flor", foto: "img/hexagonos-flor.jpg", amb: ["sala", "cozinha"], tag: "Mais pedido",
+    tec: "Hexágonos em flor", desc: "Dez hexágonos formando uma flor em rosa, cinza e cru. Ótimo para quarto de menina ou sala." },
+  { nome: "Oval Rendado Cinza", foto: "img/oval-file-cinza.jpg", amb: ["banheiro", "sala"], tag: "Rendado",
+    tec: "Ponto filé com florzinhas", desc: "Oval delicado com raios nas pontas e duas flores vazadas no centro." },
+  { nome: "Oval Verde Musgo", foto: "img/oval-verde-musgo.jpg", amb: ["banheiro", "sala"], tag: "3 cores", pet: true,
+    tec: "Raios e barrado de bico", desc: "Centro verde musgo com barrado em cru e azul claro. Encorpado e firme no chão." },
+  { nome: "Retangular Granny", foto: "img/retangular-granny.jpg", amb: ["cozinha", "sala"], tag: "Clássico", pet: true,
+    tec: "Ponto granny", desc: "Centro cru com molduras em terracota e azul marinho. Bom para porta e cozinha." },
+  { nome: "Par Oval Vinho com Flores", foto: "img/ovais-vinho.jpg", amb: ["banheiro"], tag: "Com flores", contain: true,
+    tec: "Flores aplicadas", desc: "Dois ovais em vinho e branco, um com rosas e outro com caminho de folhas no centro." },
+  { nome: "Oval Florido Bicolor", foto: "img/ovais-flores.jpg", amb: ["banheiro", "sala"], tag: "Vermelho ou azul", contain: true,
+    tec: "Granny com flores aplicadas", desc: "Fundo branco com moldura quadriculada em vermelho ou azul e flores no centro." },
+];
+
+const link = (msg) => `https://wa.me/${WHATS}?text=${encodeURIComponent(msg)}`;
+const GERAL = "Olá, Vi! Vi seu site de tapetes de crochê e queria saber mais.";
+
+document.querySelectorAll(".js-zap").forEach(a => { a.href = link(a.dataset.msg || GERAL); });
+
+const grid = document.getElementById("grid");
+grid.innerHTML = MODELOS.map((m, i) => `
+  <article class="item" data-amb="${m.amb.join(" ")}">
+    <button class="ph" type="button" data-i="${i}" aria-label="Ampliar foto: ${m.nome}">
+      <img src="${m.foto}" alt="${m.nome}" loading="lazy" ${m.contain ? 'class="contain"' : ""}>
+      <span class="tag">${m.tag}</span>
+    </button>
+    <div class="body">
+      <h3>${m.nome}</h3>
+      <span class="tec">${m.tec}</span>
+      ${m.pet ? `<span class="pet"><svg><use href="#paw"/></svg>Aguenta patinha de cachorro</span>` : ""}
+      <p class="desc">${m.desc}</p>
+      <a class="btn btn-zap" target="_blank" rel="noopener"
+         href="${link(`Olá, Vi! Vi no seu site o modelo *${m.nome}* e quero comprar. Pode me passar valores e cores disponíveis?`)}">
+        <svg><use href="#zap"/></svg>Compre agora
+      </a>
+    </div>
+  </article>`).join("");
+
+// filtros
+const chips = document.querySelectorAll(".chip");
+chips.forEach(c => c.addEventListener("click", () => {
+  chips.forEach(x => x.setAttribute("aria-pressed", String(x === c)));
+  const f = c.dataset.f;
+  grid.querySelectorAll(".item").forEach(it => {
+    it.hidden = f !== "todos" && !it.dataset.amb.split(" ").includes(f);
+  });
+}));
+
+// foto ampliada
+const zoom = document.getElementById("zoom"), zimg = document.getElementById("zoom-img");
+grid.addEventListener("click", e => {
+  const b = e.target.closest(".ph"); if (!b) return;
+  const m = MODELOS[b.dataset.i];
+  zimg.src = m.foto; zimg.alt = m.nome;
+  if (zoom.showModal) zoom.showModal();
+});
+document.getElementById("zoom-x").addEventListener("click", () => zoom.close());
+zoom.addEventListener("click", e => { if (e.target === zoom) zoom.close(); });
+
+// copiar número
+const copy = document.getElementById("copy");
+copy.addEventListener("click", () => {
+  const txt = document.getElementById("numero").textContent;
+  const done = () => { copy.textContent = "Copiado!"; setTimeout(() => copy.textContent = "Copiar número", 1800); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("numero")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copy.textContent = "Selecionado, é só copiar"; };
+  try { navigator.clipboard.writeText(txt).then(done, fallback); } catch { fallback(); }
+});
+</script>
+</body>
+</html>
